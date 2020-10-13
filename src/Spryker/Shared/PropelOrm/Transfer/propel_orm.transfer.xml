@@ -8,7 +8,9 @@
         <property name="type" type="string"/>
     </transfer>
 
-    <transfer name="ColumnsCollection">
+    <transfer name="Table">
+        <property name="name" type="string"/>
+        <property name="namespace" type="string"/>
         <property name="columns" type="Column[]" singular="columns"/>
     </transfer>
 
@@ -22,5 +24,3 @@
     </transfer>
 
 </transfers>
-
-
