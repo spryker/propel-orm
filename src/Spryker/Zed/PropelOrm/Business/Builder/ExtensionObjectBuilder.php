@@ -15,6 +15,8 @@ use Propel\Generator\Builder\Om\ExtensionObjectBuilder as PropelExtensionObjectB
 
 class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
 {
+    use ExtensionObjectBuilderTrait;
+
     /**
      * @var int
      */
@@ -30,7 +32,7 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
      *
      * @return string
      */
-    public function getUseStatements(?string $ignoredNamespace = null): string
+    public function executeGetUseStatements(?string $ignoredNamespace = null): string
     {
         $script = '';
         $declaredClasses = $this->declaredClasses;

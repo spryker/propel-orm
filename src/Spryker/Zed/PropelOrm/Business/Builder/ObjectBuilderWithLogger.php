@@ -53,7 +53,7 @@ class ObjectBuilderWithLogger extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addBooleanMutator(string &$script, Column $col): void
+    protected function executeAddBooleanMutator(string &$script, Column $col): void
     {
         $clo = $col->getLowercasedName();
 
@@ -104,7 +104,7 @@ class ObjectBuilderWithLogger extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addClassBody(string &$script): void
+    protected function executeAddClassBody(string &$script): void
     {
         $classes = $this->getFactory()
             ->createtPostSaveClassNamespacesCollector()
@@ -199,7 +199,7 @@ class ObjectBuilderWithLogger extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addDeleteClose(string &$script): void
+    protected function executeAddDeleteClose(string &$script): void
     {
         $script .= "
         \\Spryker\\Shared\\Log\\LoggerFactory::getInstance()->info('Entity delete', ['entity' => \$this->toArray('fieldName', false)]);
@@ -214,7 +214,7 @@ class ObjectBuilderWithLogger extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addHookMethods(string &$script): void
+    protected function executeAddHookMethods(string &$script): void
     {
         $hooks = [];
         foreach (['pre', 'post'] as $hook) {
@@ -239,7 +239,7 @@ class ObjectBuilderWithLogger extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addSaveClose(string &$script): void
+    protected function executeAddSaveClose(string &$script): void
     {
         $script .= "
     }

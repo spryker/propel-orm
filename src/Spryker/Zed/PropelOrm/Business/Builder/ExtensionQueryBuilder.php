@@ -15,6 +15,8 @@ use Propel\Generator\Builder\Om\ExtensionQueryBuilder as PropelExtensionQueryObj
 
 class ExtensionQueryBuilder extends PropelExtensionQueryObjectBuilder
 {
+    use ExtensionQueryBuilderTrait;
+
     /**
      * @var int
      */
@@ -30,7 +32,7 @@ class ExtensionQueryBuilder extends PropelExtensionQueryObjectBuilder
      *
      * @return string
      */
-    public function getUseStatements(?string $ignoredNamespace = null): string
+    public function executeGetUseStatements(?string $ignoredNamespace = null): string
     {
         $script = '';
         $declaredClasses = $this->declaredClasses;
