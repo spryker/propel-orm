@@ -25,7 +25,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SprykerTest\\": "tests/SprykerTest/"
+            "SprykerTest\\": "tests/SprykerTest/",
+            "Propel\\": "src/Spryker/Zed/PropelOrm/Business/Propel"
         }
     },
     "minimum-stability": "dev",
