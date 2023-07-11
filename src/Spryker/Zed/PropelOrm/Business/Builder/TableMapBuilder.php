@@ -16,6 +16,8 @@ use Propel\Generator\Builder\Om\TableMapBuilder as PropelTableMapBuilder;
 
 class TableMapBuilder extends PropelTableMapBuilder
 {
+    use TableMapBuilderTrait;
+
     /**
      * Changes default Propel behavior.
      *
@@ -24,7 +26,7 @@ class TableMapBuilder extends PropelTableMapBuilder
      *
      * @return string
      */
-    public function buildObjectInstanceCreationCode(string $objName, string $clsName): string
+    public function executeBuildObjectInstanceCreationCode(string $objName, string $clsName): string
     {
         $bundle = $this->getBundleName();
 
@@ -58,7 +60,7 @@ class TableMapBuilder extends PropelTableMapBuilder
      *
      * @return void
      */
-    protected function addPopulateObject(string &$script): void
+    protected function executeAddPopulateObject(string &$script): void
     {
         $table = $this->getTable();
         $script .= '

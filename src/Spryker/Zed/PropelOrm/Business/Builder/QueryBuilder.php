@@ -25,6 +25,7 @@ use Spryker\Zed\PropelOrm\Business\Runtime\ActiveQuery\Criteria;
  */
 class QueryBuilder extends PropelQueryBuilder
 {
+    use QueryBuilderTrait;
     use BusinessFactoryResolverAwareTrait;
 
     /**
@@ -37,7 +38,7 @@ class QueryBuilder extends PropelQueryBuilder
      *
      * @return string
      */
-    protected function addFilterByColIn(Column $col): string
+    protected function executeAddFilterByCol(Column $col): string
     {
         $script = '';
 
@@ -413,7 +414,7 @@ SCRIPT;
      *
      * @return void
      */
-    protected function addClassBody(string &$script): void
+    protected function executeAddClassBody(string &$script): void
     {
         $classes = $this->getFactory()
             ->createFindClassNamespacesCollector()
@@ -498,7 +499,7 @@ SCRIPT;
      *
      * @return void
      */
-    protected function addFindPk(string &$script): void
+    protected function executeAddFindPk(string &$script): void
     {
         $class = $this->getObjectClassName();
         $tableMapClassName = $this->getTableMapClassName();
@@ -598,7 +599,7 @@ SCRIPT;
      *
      * @return void
      */
-    protected function addFindPks(string &$script): void
+    protected function executeAddFindPks(string &$script): void
     {
         $this->declareClasses(
             '\Propel\Runtime\Collection\ObjectCollection',

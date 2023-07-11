@@ -15,6 +15,8 @@ use Propel\Generator\Builder\Om\ExtensionQueryBuilder as PropelExtensionQueryObj
 
 class ExtensionQueryBuilder extends PropelExtensionQueryObjectBuilder
 {
+    use ExtensionQueryBuilderTrait;
+
     /**
      * @var int
      */
