@@ -24,6 +24,7 @@ use Spryker\Zed\Kernel\Business\FactoryResolverAwareTrait as BusinessFactoryReso
  */
 class ObjectBuilder extends PropelObjectBuilder
 {
+    use ObjectBuilderTrait;
     use BusinessFactoryResolverAwareTrait;
 
     /**
@@ -51,7 +52,7 @@ class ObjectBuilder extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addBooleanMutator(string &$script, Column $col): void
+    protected function executeAddBooleanMutator(string &$script, Column $col): void
     {
         $clo = $col->getLowercasedName();
 
@@ -102,7 +103,7 @@ class ObjectBuilder extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addDefaultMutator(string &$script, Column $col): void
+    protected function executeAddDefaultMutator(string &$script, Column $col): void
     {
         $clo = $col->getLowercasedName();
 
@@ -145,7 +146,7 @@ class ObjectBuilder extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addClassBody(string &$script): void
+    protected function executeAddClassBody(string &$script): void
     {
         $classes = $this->getFactory()
             ->createtPostSaveClassNamespacesCollector()
@@ -165,7 +166,7 @@ class ObjectBuilder extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addHookMethods(string &$script): void
+    protected function executeAddHookMethods(string &$script): void
     {
         $hooks = [];
         foreach (['pre', 'post'] as $hook) {
@@ -190,7 +191,7 @@ class ObjectBuilder extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addSaveClose(string &$script): void
+    protected function executeAddSaveClose(string &$script): void
     {
         $script .= "
     }
@@ -236,7 +237,7 @@ class ObjectBuilder extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function addPostUpdateMethodProcess(string &$script): void
+    protected function executeAddPostSaveMethodProcess(string &$script): void
     {
         $script .= "
     /**
