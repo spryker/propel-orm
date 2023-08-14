@@ -12,9 +12,9 @@
 namespace Spryker\Zed\PropelOrm\Business\Builder;
 
 /**
- * @deprecated Will be removed without replacement. Exists only for BC reasons.
+ * @deprecated Will be removed in the next major. Exists only for "propel/propel": "2.0.0-beta1" version support.
  */
-trait TableMapBuilderTrait
+trait TableMapBuilderTraitCommon
 {
     /**
      * @param string $objName
@@ -32,13 +32,14 @@ trait TableMapBuilderTrait
     protected abstract function executeAddPopulateObject(string &$script): void;
 }
 
+// propel/propel > 2.0.0-beta1
 if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
     /**
-     * @deprecated Will be removed without replacement. Exists only for BC reasons.
+     * @deprecated Will be removed in the next major. Methods will be moved to the class that uses them.
      */
-    trait QueryBuilderTrait
+    trait TableMapBuilderTrait
     {
-        use TableMapBuilderTrait;
+        use TableMapBuilderTraitCommon;
 
         /**
          * @param string $objName
@@ -63,11 +64,11 @@ if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
     }
 } else {
     /**
-     * @deprecated Will be removed without replacement. Exists only for BC reasons.
+     * @deprecated Will be removed in the next major. Exists for BC reasons only.
      */
-    trait QueryBuilderTrait
+    trait TableMapBuilderTrait
     {
-        use TableMapBuilderTrait;
+        use TableMapBuilderTraitCommon;
 
         /**
          * @param $objName

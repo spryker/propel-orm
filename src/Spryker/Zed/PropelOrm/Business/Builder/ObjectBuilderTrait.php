@@ -14,9 +14,9 @@ namespace Spryker\Zed\PropelOrm\Business\Builder;
 use Propel\Generator\Model\Column;
 
 /**
- * @deprecated Will be removed without replacement. Exists only for BC reasons.
+ * @deprecated Will be removed in the next major. Exists only for "propel/propel": "2.0.0-beta1" version support.
  */
-trait CommonObjectBuilderTrait
+trait ObjectBuilderTraitCommon
 {
     /**
      * @param string $script
@@ -56,13 +56,14 @@ trait CommonObjectBuilderTrait
     protected abstract function executeAddSaveClose(string &$script): void;
 }
 
+// propel/propel > 2.0.0-beta1
 if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
     /**
-     * @deprecated Will be removed without replacement. Exists only for BC reasons.
+     * @deprecated Will be removed in the next major. Methods will be moved to the class that uses them.
      */
     trait ObjectBuilderTrait
     {
-        use CommonObjectBuilderTrait;
+        use ObjectBuilderTraitCommon;
 
         /**
          * @param string $script
@@ -111,18 +112,18 @@ if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
          *
          * @return void
          */
-        protected function executeAddSaveClose(string &$script): void
+        protected function addSaveClose(string &$script): void
         {
             $this->executeAddSaveClose($script);
         }
     }
 } else {
     /**
-     * @deprecated Will be removed without replacement. Exists only for BC reasons.
+     * @deprecated Will be removed in the next major. Exists for BC reasons only.
      */
     trait ObjectBuilderTrait
     {
-        use CommonObjectBuilderTrait;
+        use ObjectBuilderTraitCommon;
 
         /**
          * @param $script
@@ -171,7 +172,7 @@ if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
          *
          * @return void
          */
-        protected function executeAddSaveClose(&$script)
+        protected function addSaveClose(&$script)
         {
             $this->executeAddSaveClose($script);
         }
