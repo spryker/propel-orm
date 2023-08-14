@@ -14,9 +14,9 @@ namespace Spryker\Zed\PropelOrm\Business\Builder;
 use Propel\Generator\Model\Column;
 
 /**
- * @deprecated Will be removed without replacement. Exists only for BC reasons.
+ * @deprecated Will be removed in the next major. Exists only for "propel/propel": "2.0.0-beta1" version support.
  */
-trait CommonQueryBuilderTrait
+trait QueryBuilderTraitCommon
 {
     /**
      * @param \Propel\Generator\Model\Column $col
@@ -47,13 +47,14 @@ trait CommonQueryBuilderTrait
     protected abstract function executeAddFindPks(string &$script): void;
 }
 
+// propel/propel > 2.0.0-beta1
 if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
     /**
-     * @deprecated Will be removed without replacement. Exists only for BC reasons.
+     * @deprecated Will be removed in the next major. Methods will be moved to the class that uses them.
      */
     trait QueryBuilderTrait
     {
-        use CommonQueryBuilderTrait;
+        use QueryBuilderTraitCommon;
 
         /**
          * @param \Propel\Generator\Model\Column $col
@@ -101,7 +102,7 @@ if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
      */
     trait QueryBuilderTrait
     {
-        use CommonQueryBuilderTrait;
+        use QueryBuilderTraitCommon;
 
         /**
          * @param $script

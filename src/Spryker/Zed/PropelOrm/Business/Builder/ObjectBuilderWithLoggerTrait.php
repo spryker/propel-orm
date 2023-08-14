@@ -14,9 +14,9 @@ namespace Spryker\Zed\PropelOrm\Business\Builder;
 use Propel\Generator\Model\Column;
 
 /**
- * @deprecated Will be removed without replacement. Exists only for BC reasons.
+ * @deprecated Will be removed in the next major. Exists only for "propel/propel": "2.0.0-beta1" version support.
  */
-trait CommonObjectBuilderWithLoggerTrait
+trait ObjectBuilderWithLoggerTraitCommon
 {
     /**
      * @param string $script
@@ -55,13 +55,14 @@ trait CommonObjectBuilderWithLoggerTrait
     protected abstract function executeAddDeleteClose(string &$script): void;
 }
 
+// propel/propel > 2.0.0-beta1
 if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
     /**
-     * @deprecated Will be removed without replacement. Exists only for BC reasons.
+     * @deprecated Will be removed in the next major. Methods will be moved to the class that uses them.
      */
     trait ObjectBuilderWithLoggerTrait
     {
-        use CommonObjectBuilderWithLoggerTrait;
+        use ObjectBuilderWithLoggerTraitCommon;
 
         /**
          * @param string $script
@@ -99,7 +100,7 @@ if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
          *
          * @return void
          */
-        protected function executeAddSaveClose(string &$script): void
+        protected function addSaveClose(string &$script): void
         {
             $this->executeAddSaveClose($script);
         }
@@ -120,7 +121,7 @@ if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
      */
     trait ObjectBuilderWithLoggerTrait
     {
-        use CommonObjectBuilderWithLoggerTrait;
+        use ObjectBuilderWithLoggerTraitCommon;
 
         /**
          * @param $script
@@ -158,7 +159,7 @@ if (class_exists('Propel\Runtime\ActiveQuery\Criterion\ExistsQueryCriterion')) {
          *
          * @return void
          */
-        protected function executeAddSaveClose(&$script)
+        protected function addSaveClose(&$script)
         {
             $this->executeAddSaveClose($script);
         }
