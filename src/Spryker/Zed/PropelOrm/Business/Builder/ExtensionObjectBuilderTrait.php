@@ -20,7 +20,7 @@ trait ExtensionObjectBuilderTraitCommon
 }
 
 // propel/propel > 2.0.0-beta1
-if (class_exists('Propel\Common\Util\PathTrait')) {
+if (trait_exists('Propel\Common\Util\PathTrait')) {
     /**
      * @deprecated Will be removed in the next major. Methods will be moved to the class that uses them.
      */
