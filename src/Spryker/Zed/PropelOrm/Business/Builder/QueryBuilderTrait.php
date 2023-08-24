@@ -19,11 +19,12 @@ use Propel\Generator\Model\Column;
 trait QueryBuilderTraitCommon
 {
     /**
+     * @param string $script
      * @param \Propel\Generator\Model\Column $col
      *
-     * @return string
+     * @return void
      */
-    protected abstract function executeAddFilterByCol(Column $col): string;
+    protected abstract function executeAddFilterByCol(string &$script, Column $col): void;
 
     /**
      * @param string $script
@@ -57,13 +58,14 @@ if (trait_exists('Propel\Common\Util\PathTrait')) {
         use QueryBuilderTraitCommon;
 
         /**
+         * @param string $script
          * @param \Propel\Generator\Model\Column $col
          *
-         * @return string
+         * @return void
          */
-        protected function addFilterByCol(Column $col): string
+        protected function addFilterByCol(string &$script, Column $col): void
         {
-            return $this->executeAddFilterByCol($col);
+            $this->executeAddFilterByCol($script, $col);
         }
 
         /**
