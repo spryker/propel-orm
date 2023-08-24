@@ -237,7 +237,7 @@ class ObjectBuilder extends PropelObjectBuilder
      *
      * @return void
      */
-    protected function executeAddPostSaveMethodProcess(string &$script): void
+    protected function addPostUpdateMethodProcess(string &$script): void
     {
         $script .= "
     /**
