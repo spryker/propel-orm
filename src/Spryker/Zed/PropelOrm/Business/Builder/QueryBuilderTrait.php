@@ -105,14 +105,13 @@ if (trait_exists('Propel\Common\Util\PathTrait')) {
         use QueryBuilderTraitCommon;
 
         /**
-         * @param $script
          * @param \Propel\Generator\Model\Column $col
          *
-         * @return void
+         * @return string
          */
-        protected function addFilterByCol(&$script, Column $col)
+        protected function addFilterByCol(Column $col)
         {
-            $this->executeAddFilterByCol($script, $col);
+            return $this->executeAddFilterByCol($col);
         }
 
         /**

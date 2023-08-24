@@ -76,7 +76,7 @@ if (trait_exists('Propel\Common\Util\PathTrait')) {
          *
          * @return string
          */
-        public function buildObjectInstanceCreationCode($objName,$clsName)
+        public function buildObjectInstanceCreationCode($objName, $clsName)
         {
             return $this->executeBuildObjectInstanceCreationCode($objName, $clsName);
         }

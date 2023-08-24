@@ -35,7 +35,7 @@ if (trait_exists('Propel\Common\Util\PathTrait')) {
          */
         public function getUseStatements(?string $ignoredNamespace = null): string
         {
-            $this->executeGetUseStatements($ignoredNamespace);
+            return $this->executeGetUseStatements($ignoredNamespace);
         }
     }
 } else {
@@ -49,11 +49,11 @@ if (trait_exists('Propel\Common\Util\PathTrait')) {
         /**
          * @param $ignoredNamespace
          *
-         * @return void
+         * @return string
          */
         public function getUseStatements($ignoredNamespace = null)
         {
-            $this->executeGetUseStatements($ignoredNamespace);
+            return $this->executeGetUseStatements($ignoredNamespace);
         }
     }
 }
