@@ -4,4 +4,4 @@ parameters:
             identifier: missingType.iterableValue
     level: 8
     excludePaths:
-        - '%rootDir%/../../../vendor/spryker/spryker/Bundles/PropelOrm/src/Spryker/Zed/PropelOrm/Business/Polyfill/'
+        - '%rootDir%/../../../src/Spryker/PropelOrm/src/Spryker/Zed/PropelOrm/Business/Polyfill/'
