@@ -49,9 +49,6 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
         return $rowFromParent;
     }
 
-    /**
-     * @return array
-     */
     protected function getNormalizedAsColumnsArray(): array
     {
         $fullySpecifiedQueryColumnNames = $this->getAsColumns();
@@ -62,11 +59,6 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
         return array_combine($normalizedKeys, $normalizedValues);
     }
 
-    /**
-     * @param array $tableColumnArray
-     *
-     * @return bool
-     */
     protected function canFindColumnInTableMap(array $tableColumnArray): bool
     {
         if (!$this->isArrayOfTwoItems($tableColumnArray)) {
@@ -84,19 +76,11 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
             ->hasColumn($this->getColumnName($tableColumnArray));
     }
 
-    /**
-     * @param array $tableColumnArray
-     *
-     * @return bool
-     */
     protected function isArrayOfTwoItems(array $tableColumnArray): bool
     {
         return count($tableColumnArray) === 2 && is_string($tableColumnArray[0]) && is_string($tableColumnArray[1]);
     }
 
-    /**
-     * @return \Propel\Runtime\Map\DatabaseMap
-     */
     protected function getDatabaseMap(): DatabaseMap
     {
         return Propel::getServiceContainer()->getDatabaseMap($this->dbName);
@@ -112,11 +96,6 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
         return explode('.', $fullyQualifiedColumnName);
     }
 
-    /**
-     * @param array $tableColumnArray
-     *
-     * @return bool
-     */
     protected function isBooleanColumnType(array $tableColumnArray): bool
     {
         $columnType = $this->getDatabaseMap()
@@ -127,31 +106,16 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
         return $columnType === PropelTypes::BOOLEAN;
     }
 
-    /**
-     * @param array $tableColumnArray
-     *
-     * @return string
-     */
     protected function getTableName(array $tableColumnArray): string
     {
         return $tableColumnArray[0] ?? '';
     }
 
-    /**
-     * @param array $tableColumnArray
-     *
-     * @return string
-     */
     protected function getColumnName(array $tableColumnArray): string
     {
         return $tableColumnArray[1] ?? '';
     }
 
-    /**
-     * @param array $array
-     *
-     * @return array
-     */
     protected function normalizeArray(array $array): array
     {
         return array_map(function ($arrayElement) {

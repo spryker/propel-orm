@@ -48,9 +48,6 @@ class QueryBuilderTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return array
-     */
     protected function getFilesToGenerate(): array
     {
         return [
@@ -60,9 +57,6 @@ class QueryBuilderTest extends Unit
         ];
     }
 
-    /**
-     * @return void
-     */
     protected function _before(): void
     {
         $colunms = [
@@ -79,18 +73,12 @@ class QueryBuilderTest extends Unit
         $this->tester->writePropelFiles($this->getFilesToGenerate(), $table);
     }
 
-    /**
-     * @return void
-     */
     public function testGeneratedFilterFunctionDoesNotThrowExceptionOnNotIn(): void
     {
         $testQuery = new FooQuery();
         $testQuery->filterByTestColumn([1, 2, 3], Criteria::NOT_IN);
     }
 
-    /**
-     * @return void
-     */
     public function testFindShouldNotThrowExceptionWhenSelectAndClearMethodsWereExecuted(): void
     {
         // Arrange

@@ -30,17 +30,11 @@ class DatabaseTransactionHandlerTraitTest extends Unit
      */
     protected $connection;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->connection = $this->getMockBuilder(ConnectionInterface::class)->getMock();
     }
 
-    /**
-     * @return void
-     */
     public function testShouldCommitWhenNoErrors(): void
     {
         $callback = function (): void {
@@ -59,9 +53,6 @@ class DatabaseTransactionHandlerTraitTest extends Unit
         $databaseTransactionHandlerTraitStub->execute($callback);
     }
 
-    /**
-     * @return void
-     */
     public function testShouldCatchExceptionAndRollback(): void
     {
         $callback = function (): void {

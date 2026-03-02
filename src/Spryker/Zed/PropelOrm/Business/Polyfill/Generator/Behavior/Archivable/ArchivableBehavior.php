@@ -70,9 +70,6 @@ class ArchivableBehavior extends Behavior
      */
     protected $queryBuilderModifier;
 
-    /**
-     * @return void
-     */
     public function modifyDatabase(): void
     {
         foreach ($this->getDatabase()->getTables() as $table) {
@@ -100,25 +97,16 @@ class ArchivableBehavior extends Behavior
         }
     }
 
-    /**
-     * @return bool
-     */
     protected function isTimestamp(): bool
     {
         return $this->booleanValue($this->getParameter('is_timestamp'));
     }
 
-    /**
-     * @return string
-     */
     protected function getArchiveTableName(): string
     {
         return $this->getParameter('archive_table') ?: ($this->getTable()->getOriginCommonName() . '_archive');
     }
 
-    /**
-     * @return void
-     */
     protected function addArchiveTable(): void
     {
         $table = $this->getTable();
@@ -138,9 +126,6 @@ class ArchivableBehavior extends Behavior
         $this->syncTables();
     }
 
-    /**
-     * @return \Propel\Generator\Model\Table
-     */
     protected function createArchiveTable(): Table
     {
         $sourceTable = $this->getTable();
@@ -157,9 +142,6 @@ class ArchivableBehavior extends Behavior
         ]);
     }
 
-    /**
-     * @return \Propel\Generator\Model\Table
-     */
     protected function syncTables(): Table
     {
         $archiveTable = $this->getArchiveTable();
@@ -237,9 +219,6 @@ class ArchivableBehavior extends Behavior
         ]);
     }
 
-    /**
-     * @return string
-     */
     protected function getDataType(): string
     {
         return $this->isTimestamp() ? 'TIMESTAMP' : 'DATETIME';
@@ -359,29 +338,16 @@ class ArchivableBehavior extends Behavior
         $fk->loadMapping($fkParameterData);
     }
 
-    /**
-     * @param \Propel\Generator\Platform\PlatformInterface|null $platform
-     *
-     * @return bool
-     */
     protected function isDistinctiveIndexNameRequired(?PlatformInterface $platform): bool
     {
         return $platform instanceof PgsqlPlatform || $platform instanceof SqlitePlatform;
     }
 
-    /**
-     * @return \Propel\Generator\Model\Table|null
-     */
     public function getArchiveTable(): ?Table
     {
         return $this->archiveTable;
     }
 
-    /**
-     * @param \Propel\Generator\Builder\Om\AbstractOMBuilder $builder
-     *
-     * @return string
-     */
     public function getArchiveTablePhpName(AbstractOMBuilder $builder): string
     {
         if ($this->hasArchiveClass()) {
@@ -394,11 +360,6 @@ class ArchivableBehavior extends Behavior
         return $builder->getClassNameFromBuilder($tableStub);
     }
 
-    /**
-     * @param \Propel\Generator\Builder\Om\AbstractOMBuilder $builder
-     *
-     * @return string
-     */
     public function getArchiveTableQueryName(AbstractOMBuilder $builder): string
     {
         if ($this->hasArchiveClass()) {
@@ -408,17 +369,11 @@ class ArchivableBehavior extends Behavior
         return $builder->getClassNameFromBuilder($builder->getNewStubQueryBuilder($this->getArchiveTable()));
     }
 
-    /**
-     * @return bool
-     */
     public function hasArchiveClass(): bool
     {
         return $this->getParameter('archive_class') ? true : false;
     }
 
-    /**
-     * @return \Propel\Generator\Model\Column|null
-     */
     public function getArchivedAtColumn(): ?Column
     {
         if ($this->getArchiveTable() && $this->getParameter('log_archived_at') === 'true') {
@@ -428,25 +383,16 @@ class ArchivableBehavior extends Behavior
         return null;
     }
 
-    /**
-     * @return bool
-     */
     public function isArchiveOnInsert(): bool
     {
         return $this->getParameter('archive_on_insert') === 'true';
     }
 
-    /**
-     * @return bool
-     */
     public function isArchiveOnUpdate(): bool
     {
         return $this->getParameter('archive_on_update') === 'true';
     }
 
-    /**
-     * @return bool
-     */
     public function isArchiveOnDelete(): bool
     {
         return $this->getParameter('archive_on_delete') === 'true';

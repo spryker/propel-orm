@@ -20,12 +20,6 @@ class PropelFileHelper extends Module
      */
     protected $filesNames = [];
 
-    /**
-     * @param array $filesToGenerate
-     * @param \Propel\Generator\Model\Table $table
-     *
-     * @return void
-     */
     public function writePropelFiles(array $filesToGenerate, Table $table): void
     {
         $config = new QuickGeneratorConfig();
@@ -37,11 +31,6 @@ class PropelFileHelper extends Module
         }
     }
 
-    /**
-     * @param \Codeception\TestInterface $test
-     *
-     * @return void
-     */
     public function _after(TestInterface $test): void
     {
         parent::_after($test);
@@ -49,12 +38,6 @@ class PropelFileHelper extends Module
         $this->deletePropelFiles();
     }
 
-    /**
-     * @param \Propel\Generator\Builder\Om\AbstractOMBuilder $objectBuilder
-     * @param string $fileName
-     *
-     * @return void
-     */
     protected function writePropelFile(AbstractOMBuilder $objectBuilder, string $fileName): void
     {
         $fileContent = $objectBuilder->build();
@@ -67,9 +50,6 @@ class PropelFileHelper extends Module
         $this->filesNames[] = $fileName;
     }
 
-    /**
-     * @return void
-     */
     protected function deletePropelFiles(): void
     {
         foreach ($this->filesNames as $fileName) {

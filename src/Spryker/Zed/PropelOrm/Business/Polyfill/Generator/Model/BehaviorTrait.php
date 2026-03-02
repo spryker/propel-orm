@@ -87,11 +87,6 @@ trait BehaviorTrait
         return $template->render($vars);
     }
 
-    /**
-     * @param string $templateDir
-     *
-     * @return string
-     */
     protected function getOverridedTemplatePath(string $templateDir = ''): string
     {
         $path = $this->getDirname();

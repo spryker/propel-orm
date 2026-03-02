@@ -58,11 +58,6 @@ class PropelDatabaseTransactionHandler implements TransactionHandlerInterface
         }
     }
 
-    /**
-     * @param \Propel\Runtime\Connection\ConnectionInterface $connection
-     *
-     * @return void
-     */
     public function setConnection(ConnectionInterface $connection): void
     {
         $this->connection = $connection;

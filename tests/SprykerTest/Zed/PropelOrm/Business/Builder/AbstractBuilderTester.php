@@ -75,9 +75,6 @@ abstract class AbstractBuilderTester extends Unit
 
     protected const FOO_BUILDER_CLASS = ObjectBuilder::class;
 
-    /**
-     * @return void
-     */
     protected function _before(): void
     {
         /**
@@ -116,9 +113,6 @@ abstract class AbstractBuilderTester extends Unit
         $this->tester->writePropelFiles($this->getFilesToGenerate(), $table);
     }
 
-    /**
-     * @return array
-     */
     protected function getFilesToGenerate(): array
     {
         return [

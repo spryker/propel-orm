@@ -17,12 +17,6 @@ class ModelBuildCommand extends PropelModelBuildCommand implements ConfigurableP
 {
     use PropelConfiguratorTrait;
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     public function run(InputInterface $input, OutputInterface $output): int
     {
         return (int)$this->execute($input, $output);

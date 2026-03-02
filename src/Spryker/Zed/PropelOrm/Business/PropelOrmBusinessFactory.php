@@ -17,9 +17,6 @@ use Spryker\Zed\PropelOrm\PropelOrmDependencyProvider;
  */
 class PropelOrmBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\PropelOrm\Business\Builder\Collector\ClassNamespacesCollectorInterface
-     */
     public function createFindClassNamespacesCollector(): ClassNamespacesCollectorInterface
     {
         return new ClassNamespacesCollector(
@@ -27,9 +24,6 @@ class PropelOrmBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\PropelOrm\Business\Builder\Collector\ClassNamespacesCollectorInterface
-     */
     public function createtPostSaveClassNamespacesCollector(): ClassNamespacesCollectorInterface
     {
         return new ClassNamespacesCollector(

@@ -35,11 +35,6 @@ class PropelOrmDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const PLUGINS_POST_DELETE_EXTENSION = 'PLUGINS_POST_DELETE_EXTENSION';
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function provideBusinessLayerDependencies(Container $container): Container
     {
         $container = $this->addFindExtensionPlugins($container);
@@ -50,11 +45,6 @@ class PropelOrmDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addFindExtensionPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_FIND_EXTENSION, function (Container $container) {
@@ -64,11 +54,6 @@ class PropelOrmDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addPostSaveExtensionPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_POST_SAVE_EXTENSION, function (Container $container) {
@@ -78,11 +63,6 @@ class PropelOrmDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addPostUpdateExtensionPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_POST_UPDATE_EXTENSION, function (Container $container) {
@@ -92,11 +72,6 @@ class PropelOrmDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addPostDeleteExtensionPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_POST_DELETE_EXTENSION, function (Container $container) {

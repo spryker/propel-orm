@@ -66,14 +66,6 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
         return $script;
     }
 
-    /**
-     * @param string $namespace
-     * @param string $class
-     * @param string $alias
-     * @param string $script
-     *
-     * @return string
-     */
     protected function addUseStatementToScript(string $namespace, string $class, string $alias, string $script): string
     {
         if ($this->isBaseClass($namespace, $class) && $this->sprykerBaseClassExists($class)) {
@@ -88,13 +80,6 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
         return $this->addUseStatementWithAlias($namespace, $class, $alias, $script);
     }
 
-    /**
-     * @param string $namespace
-     * @param string $class
-     * @param string $script
-     *
-     * @return string
-     */
     protected function addUseStatementWithoutAlias(string $namespace, string $class, string $script): string
     {
         $script .= sprintf("use %s\\%s;
@@ -103,14 +88,6 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
         return $script;
     }
 
-    /**
-     * @param string $namespace
-     * @param string $class
-     * @param string $alias
-     * @param string $script
-     *
-     * @return string
-     */
     protected function addUseStatementWithAlias(string $namespace, string $class, string $alias, string $script): string
     {
         $script .= sprintf("use %s\\%s as %s;
@@ -119,33 +96,16 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
         return $script;
     }
 
-    /**
-     * @param string $namespace
-     * @param string $class
-     *
-     * @return bool
-     */
     protected function isOwnClass(string $namespace, string $class): bool
     {
         return ($class === $this->getUnqualifiedClassName() && $namespace === $this->getNamespace());
     }
 
-    /**
-     * @param string $namespace
-     * @param string $class
-     *
-     * @return bool
-     */
     protected function isBaseClass(string $namespace, string $class): bool
     {
         return ($namespace === $this->getNamespace() . '\\Base' && $class == $this->getUnqualifiedClassName());
     }
 
-    /**
-     * @param string $class
-     *
-     * @return bool
-     */
     protected function sprykerBaseClassExists(string $class): bool
     {
         $sprykerNamespace = $this->getSprykerNamespace();
@@ -158,9 +118,6 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
         return false;
     }
 
-    /**
-     * @return string
-     */
     protected function getSprykerNamespace(): string
     {
         $namespaceFragments = explode('\\', $this->getNamespaceOrFail());
@@ -170,12 +127,6 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
         return implode('\\', $namespaceFragments);
     }
 
-    /**
-     * @param string $sprykerNamespace
-     * @param string $class
-     *
-     * @return string
-     */
     protected function getSprykerClassName(string $sprykerNamespace, string $class): string
     {
         return $sprykerNamespace . '\\Abstract' . $class;

@@ -38,9 +38,6 @@ class TypeAwareSimpleArrayFormatterTest extends Unit
         'table.columnName2' => 'columnName2',
     ];
 
-    /**
-     * @return void
-     */
     public function testGetStructuredArrayFromRowItReturnsSimpleArrayRowIfSimpleArrayRowIsFalse(): void
     {
         //Arrange
@@ -60,9 +57,6 @@ class TypeAwareSimpleArrayFormatterTest extends Unit
         $this->assertFalse($result);
     }
 
-    /**
-     * @return void
-     */
     public function testGetStructuredArrayFromRowItReturnsSimpleArrayRowIfSimpleArrayRowIsAValue(): void
     {
         // Arrange
@@ -82,9 +76,6 @@ class TypeAwareSimpleArrayFormatterTest extends Unit
         $this->assertSame('myvalue', $result);
     }
 
-    /**
-     * @return void
-     */
     public function testGetStructuredArrayFromRowItCastValuesToBooleanIfColumnTypeIsBoolean(): void
     {
         // Arrange
@@ -119,9 +110,6 @@ class TypeAwareSimpleArrayFormatterTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testGetStructuredArrayFromRowItDoesNotCastValuesToBooleanIfColumnTypeIsNotBoolean(): void
     {
         // Arrange

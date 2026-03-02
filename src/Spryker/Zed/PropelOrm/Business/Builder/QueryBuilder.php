@@ -36,11 +36,6 @@ class QueryBuilder extends PropelQueryBuilder
      */
     public const ATTRIBUTE_CASE_INSENSITIVE = 'caseInsensitive';
 
-    /**
-     * @param \Propel\Generator\Model\Column $col
-     *
-     * @return string
-     */
     protected function addFilterByColIn(Column $col): string
     {
         $script = '';
@@ -69,11 +64,6 @@ SCRIPT;
         return $script;
     }
 
-    /**
-     * @param \Propel\Generator\Model\Column $col
-     *
-     * @return string
-     */
     protected function addFilterByColBetween(Column $col): string
     {
         $script = '';
@@ -107,11 +97,6 @@ SCRIPT;
         return $script;
     }
 
-    /**
-     * @param \Propel\Generator\Model\Column $col
-     *
-     * @return string
-     */
     protected function addFilterByColLike(Column $col): string
     {
         $script = '';
@@ -412,11 +397,6 @@ SCRIPT;
 ";
     }
 
-    /**
-     * @param string $script
-     *
-     * @return void
-     */
     protected function addClassBody(string &$script): void
     {
         $classes = $this->getFactory()
@@ -560,11 +540,6 @@ SCRIPT;
     ";
     }
 
-    /**
-     * @param string $script
-     *
-     * @return void
-     */
     protected function addFindPk(string &$script): void
     {
         $class = $this->getObjectClassName();

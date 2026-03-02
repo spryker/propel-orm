@@ -20,19 +20,11 @@ class DatabaseTransactionHandlerTraitStub
      */
     protected $connection;
 
-    /**
-     * @param \Propel\Runtime\Connection\ConnectionInterface $connection
-     */
     public function __construct(ConnectionInterface $connection)
     {
         $this->connection = $connection;
     }
 
-    /**
-     * @param \Closure $callback
-     *
-     * @return void
-     */
     public function execute(Closure $callback): void
     {
         $this->handleDatabaseTransaction($callback, $this->connection);

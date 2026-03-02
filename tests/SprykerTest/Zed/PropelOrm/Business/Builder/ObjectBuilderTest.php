@@ -40,9 +40,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
      */
     protected const VARCHAR_VALUE_2 = 'The additional new value from testing method.';
 
-    /**
-     * @return void
-     */
     public function testSaveShouldNotThrowAnException(): void
     {
         // Arrange
@@ -57,9 +54,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertSame($expectedCount, $affectedCount);
     }
 
-    /**
-     * @return void
-     */
     public function testBooleanColumnWithDefaultValueShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange
@@ -77,9 +71,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertTrue($fooExpectChange->isColumnModified($columnKeyName));
     }
 
-    /**
-     * @return void
-     */
     public function testBooleanColumnWithoutDefaultValueShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange
@@ -97,9 +88,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertTrue($fooExpectChange->isColumnModified($columnKeyName));
     }
 
-    /**
-     * @return void
-     */
     public function testBooleanColumnWithDefaultValueOnSavedEntityShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange
@@ -124,9 +112,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertTrue($fooExpectChange->isColumnModified($columnKeyName));
     }
 
-    /**
-     * @return void
-     */
     public function testBooleanColumnWithoutDefaultValueOnSavedEntityShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange
@@ -151,9 +136,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertTrue($fooExpectChange->isColumnModified($columnKeyName));
     }
 
-    /**
-     * @return void
-     */
     public function testVarcharColumnWithDefaultValueShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange
@@ -171,9 +153,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertTrue($fooExpectChange->isColumnModified($columnKeyName));
     }
 
-    /**
-     * @return void
-     */
     public function testVarcharColumnWithoutDefaultValueShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange
@@ -191,9 +170,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertTrue($fooExpectChange->isColumnModified($columnKeyName));
     }
 
-    /**
-     * @return void
-     */
     public function testVarcharColumnWithDefaultValueOnSavedEntityShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange
@@ -218,9 +194,6 @@ class ObjectBuilderTest extends AbstractBuilderTester
         $this->assertTrue($fooExpectChange->isColumnModified($columnKeyName));
     }
 
-    /**
-     * @return void
-     */
     public function testVarcharColumnWithoutDefaultValueOnSavedEntityShouldBeModifiedWhenValueIsSet(): void
     {
         // Arrange

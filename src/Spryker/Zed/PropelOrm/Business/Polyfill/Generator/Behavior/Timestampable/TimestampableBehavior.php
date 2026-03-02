@@ -37,25 +37,16 @@ class TimestampableBehavior extends Behavior
         'is_timestamp' => 'true',
     ];
 
-    /**
-     * @return bool
-     */
     protected function withUpdatedAt(): bool
     {
         return !$this->booleanValue($this->getParameter('disable_updated_at'));
     }
 
-    /**
-     * @return bool
-     */
     protected function withCreatedAt(): bool
     {
         return !$this->booleanValue($this->getParameter('disable_created_at'));
     }
 
-    /**
-     * @return bool
-     */
     protected function isTimestamp(): bool
     {
         return $this->booleanValue($this->getParameter('is_timestamp'));
@@ -84,9 +75,6 @@ class TimestampableBehavior extends Behavior
         }
     }
 
-    /**
-     * @return string
-     */
     protected function getDataType(): string
     {
         return $this->isTimestamp() ? 'TIMESTAMP' : 'DATETIME';
@@ -104,12 +92,6 @@ class TimestampableBehavior extends Behavior
         return 'set' . $this->getColumnForParameter($column)->getPhpName();
     }
 
-    /**
-     * @param string $columnName
-     * @param \Propel\Generator\Builder\Om\AbstractOMBuilder $builder
-     *
-     * @return string
-     */
     protected function getColumnConstant(string $columnName, AbstractOMBuilder $builder): string
     {
         return $builder->getColumnConstant($this->getColumnForParameter($columnName));
@@ -172,11 +154,6 @@ if (!\$this->isColumnModified(" . $this->getColumnConstant('update_column', $bui
         return $script;
     }
 
-    /**
-     * @param \Propel\Generator\Builder\Om\AbstractOMBuilder $builder
-     *
-     * @return string
-     */
     public function objectMethods(AbstractOMBuilder $builder): string
     {
         if (!$this->withUpdatedAt()) {
@@ -198,11 +175,6 @@ public function keepUpdateDateUnchanged()
 ";
     }
 
-    /**
-     * @param \Propel\Generator\Builder\Om\AbstractOMBuilder $builder
-     *
-     * @return string
-     */
     public function queryMethods(AbstractOMBuilder $builder): string
     {
         $script = '';

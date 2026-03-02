@@ -25,7 +25,6 @@ class Behavior extends MappingModel
     /**
      * @deprecated This class exists for BC reasons only. Use \Propel\Generator\Model\Behavior instead.
      */
-
     use BehaviorTrait;
 
     /**

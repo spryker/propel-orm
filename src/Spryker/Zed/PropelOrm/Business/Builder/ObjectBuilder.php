@@ -26,9 +26,6 @@ class ObjectBuilder extends PropelObjectBuilder
 {
     use BusinessFactoryResolverAwareTrait;
 
-    /**
-     * @param \Propel\Generator\Model\Table $table
-     */
     public function __construct(Table $table)
     {
         parent::__construct($table);
