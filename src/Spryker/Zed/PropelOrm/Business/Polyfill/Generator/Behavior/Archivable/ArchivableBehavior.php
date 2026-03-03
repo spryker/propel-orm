@@ -9,6 +9,8 @@
  * @see https://github.com/propelorm/Propel2
  */
 
+// phpcs:disable Spryker.Namespaces.SprykerNamespace.NamespaceFolderMismatch
+
 namespace Propel\Generator\Behavior\Archivable;
 
 use Propel\Generator\Builder\Om\AbstractOMBuilder;
