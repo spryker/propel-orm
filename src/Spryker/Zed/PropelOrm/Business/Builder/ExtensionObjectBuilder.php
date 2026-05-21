@@ -12,9 +12,12 @@
 namespace Spryker\Zed\PropelOrm\Business\Builder;
 
 use Propel\Generator\Builder\Om\ExtensionObjectBuilder as PropelExtensionObjectBuilder;
+use Spryker\Zed\Kernel\BundleConfigResolverAwareTrait;
 
 class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
 {
+    use BundleConfigResolverAwareTrait;
+
     /**
      * @var int
      */
@@ -24,6 +27,8 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
      * @var int
      */
     public const POSITION_OF_BASE = 4;
+
+    protected const string DEFAULT_VENDOR_NAMESPACE = 'Spryker';
 
     /**
      * @param string|null $ignoredNamespace the ignored namespace
@@ -108,23 +113,37 @@ class ExtensionObjectBuilder extends PropelExtensionObjectBuilder
 
     protected function sprykerBaseClassExists(string $class): bool
     {
-        $sprykerNamespace = $this->getSprykerNamespace();
-        $sprykerClassName = $this->getSprykerClassName($sprykerNamespace, $class);
-
-        if (class_exists($sprykerClassName)) {
-            return true;
-        }
-
-        return false;
+        return class_exists($this->getSprykerClassName($this->getSprykerNamespace(), $class));
     }
 
     protected function getSprykerNamespace(): string
     {
         $namespaceFragments = explode('\\', $this->getNamespaceOrFail());
-        $namespaceFragments[static::POSITION_OF_ORM] = 'Spryker';
         $namespaceFragments[static::POSITION_OF_BASE] = 'Propel';
 
+        foreach ($this->getSupportedVendorNamespaces() as $vendorNamespace) {
+            $namespaceFragments[static::POSITION_OF_ORM] = $vendorNamespace;
+            $namespace = implode('\\', $namespaceFragments);
+
+            if (class_exists($this->getSprykerClassName($namespace, $this->getUnqualifiedClassName()))) {
+                return $namespace;
+            }
+        }
+
+        $namespaceFragments[static::POSITION_OF_ORM] = static::DEFAULT_VENDOR_NAMESPACE;
+
         return implode('\\', $namespaceFragments);
+    }
+
+    /**
+     * @return array<string>
+     */
+    protected function getSupportedVendorNamespaces(): array
+    {
+        /** @var \Spryker\Zed\PropelOrm\PropelOrmConfig $config */
+        $config = $this->getConfig();
+
+        return $config->getCoreNamespaces();
     }
 
     protected function getSprykerClassName(string $sprykerNamespace, string $class): string

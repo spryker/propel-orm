@@ -145,7 +145,7 @@ class ObjectBuilder extends PropelObjectBuilder
     protected function addClassBody(string &$script): void
     {
         $classes = $this->getFactory()
-            ->createtPostSaveClassNamespacesCollector()
+            ->createPostSaveClassNamespacesCollector()
             ->extractClassesToDeclare();
 
         foreach ($classes as $class) {

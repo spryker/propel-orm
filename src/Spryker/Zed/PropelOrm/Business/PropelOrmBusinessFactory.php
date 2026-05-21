@@ -24,7 +24,7 @@ class PropelOrmBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    public function createtPostSaveClassNamespacesCollector(): ClassNamespacesCollectorInterface
+    public function createPostSaveClassNamespacesCollector(): ClassNamespacesCollectorInterface
     {
         return new ClassNamespacesCollector(
             $this->getPostSaveExtensionPlugins(),
