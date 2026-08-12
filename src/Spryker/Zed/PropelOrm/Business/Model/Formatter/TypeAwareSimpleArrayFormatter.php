@@ -8,6 +8,8 @@
 namespace Spryker\Zed\PropelOrm\Business\Model\Formatter;
 
 use Propel\Generator\Model\PropelTypes;
+use Propel\Runtime\ActiveQuery\BaseModelCriteria;
+use Propel\Runtime\DataFetcher\DataFetcherInterface;
 use Propel\Runtime\Formatter\SimpleArrayFormatter;
 use Propel\Runtime\Map\DatabaseMap;
 use Propel\Runtime\Propel;
@@ -19,6 +21,35 @@ use Propel\Runtime\Propel;
  */
 class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
 {
+    /**
+     * @var array<string, bool>
+     */
+    protected array $canFindColumnCache = [];
+
+    /**
+     * @var array<string, bool>
+     */
+    protected array $isBooleanColumnCache = [];
+
+    /**
+     * @var array<string, string>|null
+     */
+    protected ?array $normalizedAsColumnsArray = null;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return $this
+     */
+    public function init(BaseModelCriteria $criteria, ?DataFetcherInterface $dataFetcher = null)
+    {
+        $this->normalizedAsColumnsArray = null;
+        $this->canFindColumnCache = [];
+        $this->isBooleanColumnCache = [];
+
+        return parent::init($criteria, $dataFetcher);
+    }
+
     /**
      * @param array $row
      *
@@ -36,12 +67,13 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
 
         foreach ($rowFromParent as $key => $value) {
             $tableColumnArray = $this->getTableColumnArray($normalizedAsColumnsArray[$key]);
+            $cacheKey = $this->getCacheKey($tableColumnArray);
 
-            if (!$this->canFindColumnInTableMap($tableColumnArray)) {
+            if (!$this->canFindColumnInTableMap($tableColumnArray, $cacheKey)) {
                 continue;
             }
 
-            if ($this->isBooleanColumnType($tableColumnArray)) {
+            if ($this->isBooleanColumnType($tableColumnArray, $cacheKey)) {
                 $rowFromParent[$key] = (bool)$value;
             }
         }
@@ -51,15 +83,28 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
 
     protected function getNormalizedAsColumnsArray(): array
     {
+        if ($this->normalizedAsColumnsArray !== null) {
+            return $this->normalizedAsColumnsArray;
+        }
+
         $fullySpecifiedQueryColumnNames = $this->getAsColumns();
 
         $normalizedValues = $this->normalizeArray($fullySpecifiedQueryColumnNames);
         $normalizedKeys = $this->normalizeArray(array_keys($fullySpecifiedQueryColumnNames));
 
-        return array_combine($normalizedKeys, $normalizedValues);
+        return $this->normalizedAsColumnsArray = array_combine($normalizedKeys, $normalizedValues);
     }
 
-    protected function canFindColumnInTableMap(array $tableColumnArray): bool
+    protected function canFindColumnInTableMap(array $tableColumnArray, string $cacheKey): bool
+    {
+        if (array_key_exists($cacheKey, $this->canFindColumnCache)) {
+            return $this->canFindColumnCache[$cacheKey];
+        }
+
+        return $this->canFindColumnCache[$cacheKey] = $this->resolveCanFindColumnInTableMap($tableColumnArray);
+    }
+
+    protected function resolveCanFindColumnInTableMap(array $tableColumnArray): bool
     {
         if (!$this->isArrayOfTwoItems($tableColumnArray)) {
             return false;
@@ -96,7 +141,16 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
         return explode('.', $fullyQualifiedColumnName);
     }
 
-    protected function isBooleanColumnType(array $tableColumnArray): bool
+    protected function isBooleanColumnType(array $tableColumnArray, string $cacheKey): bool
+    {
+        if (array_key_exists($cacheKey, $this->isBooleanColumnCache)) {
+            return $this->isBooleanColumnCache[$cacheKey];
+        }
+
+        return $this->isBooleanColumnCache[$cacheKey] = $this->resolveIsBooleanColumnType($tableColumnArray);
+    }
+
+    protected function resolveIsBooleanColumnType(array $tableColumnArray): bool
     {
         $columnType = $this->getDatabaseMap()
             ->getTable($this->getTableName($tableColumnArray))
@@ -104,6 +158,16 @@ class TypeAwareSimpleArrayFormatter extends SimpleArrayFormatter
             ->getType();
 
         return $columnType === PropelTypes::BOOLEAN;
+    }
+
+    protected function getCacheKey(array $tableColumnArray): string
+    {
+        return sprintf(
+            '%s.%s.%s',
+            $this->dbName,
+            $this->getTableName($tableColumnArray),
+            $this->getColumnName($tableColumnArray),
+        );
     }
 
     protected function getTableName(array $tableColumnArray): string
