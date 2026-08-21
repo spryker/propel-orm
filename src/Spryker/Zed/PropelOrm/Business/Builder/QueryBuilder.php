@@ -49,13 +49,13 @@ class QueryBuilder extends PropelQueryBuilder
     /**
      * Applies Criteria::IN filtering criteria for the column.
      *
-     * @param array \$${variableName}s Filter value.
+     * @param array \${$variableName}s Filter value.
      *
      * @return \$this The current query, for fluid interface
      */
-    public function filterBy${colPhpName}_In(array \$${variableName}s)
+    public function filterBy{$colPhpName}_In(array \${$variableName}s)
     {
-        return \$this->filterBy$colPhpName(\$${variableName}s, Criteria::IN);
+        return \$this->filterBy$colPhpName(\${$variableName}s, Criteria::IN);
     }
 
 SCRIPT;
@@ -86,7 +86,7 @@ SCRIPT;
      *
      * @return \$this The current query, for fluid interface
      */
-    public function filterBy${colPhpName}_Between(array \$$variableName)
+    public function filterBy{$colPhpName}_Between(array \$$variableName)
     {
         return \$this->filterBy$colPhpName(\$$variableName, SprykerCriteria::BETWEEN);
     }
@@ -114,7 +114,7 @@ SCRIPT;
      *
      * @return \$this The current query, for fluid interface
      */
-    public function filterBy${colPhpName}_Like(\$$variableName)
+    public function filterBy{$colPhpName}_Like(\$$variableName)
     {
         return \$this->filterBy$colPhpName(\$$variableName, Criteria::LIKE);
     }
