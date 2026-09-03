@@ -26,3 +26,10 @@ suites:
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
                 - \SprykerTest\Shared\Propel\Helper\TableHelper
                 - \SprykerTest\Shared\PropelOrm\Helper\PropelFileHelper
+    Communication:
+        path: Communication
+        actor: PropelOrmCommunicationTester
+        modules:
+            enabled:
+                - Asserts
+                - \SprykerTest\Shared\Testify\Helper\Environment
