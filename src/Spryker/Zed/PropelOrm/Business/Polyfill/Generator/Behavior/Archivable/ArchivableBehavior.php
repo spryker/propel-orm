@@ -334,10 +334,10 @@ class ArchivableBehavior extends Behavior
             throw new SchemaException("Table `$tableName`: Archivable behavior misses foreign key parameters. Please supply `localColumn`, `foreignTable` and `foreignColumn` for every entry");
         }
 
-        $fk = new ForeignKey($fkParameterData['name'] ?? null);
-        $fk->addReference($fkParameterData['localColumn'], $fkParameterData['foreignColumn']);
-        $table->addForeignKey($fk);
-        $fk->loadMapping($fkParameterData);
+        $foreignKey = new ForeignKey($fkParameterData['name'] ?? null);
+        $foreignKey->addReference($fkParameterData['localColumn'], $fkParameterData['foreignColumn']);
+        $table->addForeignKey($foreignKey);
+        $foreignKey->loadMapping($fkParameterData);
     }
 
     protected function isDistinctiveIndexNameRequired(?PlatformInterface $platform): bool
